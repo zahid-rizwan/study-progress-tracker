@@ -4,10 +4,10 @@ import App from './App.jsx';
 import './index.css';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 import Home from './pages/Home.jsx';
-import Blogs from './pages/Blogs.jsx';
-import Reports from './pages/Reports.jsx';
-import Inbox from './pages/Inbox.jsx';
-import Setting from './pages/Setting.jsx'; // Import the Setting component
+import Sessions from './pages/Sessions.jsx';
+import Goals from './pages/Goals.jsx';
+import Assignments from './pages/Assignments.jsx';
+import Profile from './pages/Profile.jsx';
 
 const router = createHashRouter([
   {
@@ -19,20 +19,20 @@ const router = createHashRouter([
         element: <Home />
       },
       {
-        path: '/blogs',
-        element: <Blogs />
+        path: '/sessions',
+        element: <Sessions />
       },
       {
-        path: '/reports',
-        element: <Reports />
+        path: '/goals',
+        element: <Goals />
       },
       {
-        path: '/inbox',
-        element: <Inbox />
+        path: '/assignments',
+        element: <Assignments />
       },
       {
-        path: '/setting',
-        element: <Setting />
+        path: '/profile',
+        element: <Profile />
       }
     ]
   }

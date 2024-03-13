@@ -43,10 +43,10 @@ import { NavLink } from "react-router-dom";
 const SideBar = ({ sidebarToggle }) => {
   const menuItems = [
     { icon: <FaHome className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Home", path: "/" },
-    { icon: <FaRegFileAlt className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Blogs", path: "/blogs" },
-    { icon: <FaPoll className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Reports", path: "/reports" },
-    { icon: <FaRegEnvelope className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Inbox", path: "/inbox" },
-    { icon: <FaCog className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Settings", path: "/setting" }
+    { icon: <FaRegFileAlt className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Sessions", path: "/sessions" },
+    { icon: <FaPoll className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Assignments", path: "/assignments" },
+    { icon: <FaRegEnvelope className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Goals", path: "/goals" },
+    { icon: <FaCog className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Profile", path: "/profile" }
   ];
 
   return (
