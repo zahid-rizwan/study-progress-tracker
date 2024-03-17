@@ -2,6 +2,7 @@
 import SideBar from "./components/SideBar";
 import DashBoard from "./components/DashBoard";
 import { useState } from "react";
+import Assignments from "./pages/Assignments";
 const App = () => {
   const [sidebarToggle,setSidebarToggle]=useState(false)
 
@@ -10,6 +11,7 @@ const App = () => {
       <SideBar sidebarToggle={sidebarToggle}/>
       <DashBoard sidebarToggle={sidebarToggle}
       setSidebarToggle={setSidebarToggle}/>
+    
     </div>
   );
 };

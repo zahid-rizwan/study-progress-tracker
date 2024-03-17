@@ -26,7 +26,7 @@ export const Navbar = ({ sidebarToggle, setSidebarToggle }) => {
         </button>
         <div className="-mt-5  mr-3">
           <button
-            className={"sm:hidden w-6 h-6    fixed text-white"}
+            className={"lg:hidden w-6 h-6 fixed text-white"}
             onClick={() => setSidebarToggle(!sidebarToggle)}
           >
             {" "}
