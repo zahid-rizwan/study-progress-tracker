@@ -58,18 +58,17 @@ const AssignmentTracker = () => {
   const priorityColor = (priority) => {
     switch (priority) {
       case "high":
-        return "bg-red-200";
+        return "bg-red-600";
       case "medium":
-        return "bg-yellow-200";
+        return "bg-amber-600";
       case "low":
       default:
-        return "bg-green-200";
+        return "bg-green-500";
     }
   };
 
   return (
     <div className="container mx-auto p-10">
-      {/* <h1 className="text-2xl font-bold mb-4">Assignment Tracker</h1> */}
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded shadow mb-4"
         onClick={() => setShowModal(true)}
@@ -78,7 +77,7 @@ const AssignmentTracker = () => {
       </button>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-4 rounded shadow">
+          <div className="bg-white p-4 rounded shadow  ">
             <h2 className="text-lg font-bold mb-4">Add Assignment</h2>
             <input
               type="text"
@@ -102,9 +101,9 @@ const AssignmentTracker = () => {
               onChange={handleInputChange}
               className="block w-full px-4 py-2 border rounded mb-2"
             >
-              <option value="low">Low Priority</option>
-              <option value="medium">Medium Priority</option>
-              <option value="high">High Priority</option>
+              <option value="low" style={{color:"rgb(34 197 94)"}}>Low Priority</option>
+              <option value="medium" style={{color:"rgb(217 119 6)"}}>Medium Priority</option>
+              <option value="high" style={{color:"rgb(220 38 38)"}}>High Priority</option>
             </select>
             <div className="flex justify-end">
               <button
@@ -123,67 +122,45 @@ const AssignmentTracker = () => {
           </div>
         </div>
       )}
-      <table className="w-full border-collapse border border-gray-400">
-        <thead>
-          <tr>
-            <th
-              className="border border-gray-400 px-4 py-2 cursor-pointer"
-              onClick={() => handleSort("name")}
-            >
-              Assignment Name
-            </th>
-            <th
-              className="border border-gray-400 px-4 py-2 cursor-pointer"
-              onClick={() => handleSort("dueDate")}
-            >
-              Due Date
-            </th>
-            <th
-              className="border border-gray-400 px-4 py-2 cursor-pointer"
-              onClick={() => handleSort("priority")}
-            >
-              Priority
-            </th>
-            <th
-              className="border border-gray-400 px-4 py-2 cursor-pointer"
-              onClick={() => handleSort("status")}
-            >
-              Status
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {assignments.map((assignment, index) => (
-            <tr key={index} className={priorityColor(assignment.priority)}>
-              <td className="border border-gray-400 px-4 py-2">
-                {assignment.name}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {assignment.dueDate}
-              </td>
-              <td className="border border-gray-400 px-4 py-2">
-                {assignment.priority}
-              </td>
-              <td
-                className="border border-gray-400 px-4 py-2"
-                style={{
-                  backgroundColor:
-                    assignment.status === "completed" ? "green" : "red",
-                }}
-              >
-                <select
-                  value={assignment.status}
-                  onChange={(e) => handleStatusChange(index, e.target.value)}
-                  className="border rounded px-2 py-1 bg-transparent"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="completed">Completed</option>
-                </select>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-400 text-center">
+          <thead>
+            <tr>
+              <th className="border border-gray-400 px-4 py-2 cursor-pointer" onClick={() => handleSort("name")}>
+                Assignment Name
+              </th>
+              <th className="border border-gray-400 px-4 py-2 cursor-pointer" onClick={() => handleSort("dueDate")}>
+                Due Date
+              </th>
+              <th className="border border-gray-400 px-4 py-2 cursor-pointer" onClick={() => handleSort("priority")}>
+                Priority
+              </th>
+              <th className="border border-gray-400 px-4 py-2 cursor-pointer" onClick={() => handleSort("status")}>
+                Status
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {assignments.map((assignment, index) => (
+              <tr key={index} className={priorityColor(assignment.priority)}>
+                <td className="border border-gray-400 px-4 py-2">{assignment.name}</td>
+                <td className="border border-gray-400 px-4 py-2">{assignment.dueDate}</td>
+                <td className="border border-gray-400 px-4 py-2">{assignment.priority}</td>
+                <td className="border border-gray-400 px-4 py-2" style={{ backgroundColor: assignment.status === "completed" ? "rgb(22 163 74)" : "rgb(185 28 28)" }}>
+                  <select
+                    value={assignment.status}
+                    onChange={(e) => handleStatusChange(index, e.target.value)}
+                    className="border rounded px-2 py-1 bg-transparent"
+                  >
+                    <option value="pending" >Pending</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

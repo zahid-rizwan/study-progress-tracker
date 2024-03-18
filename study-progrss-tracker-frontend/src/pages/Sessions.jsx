@@ -69,18 +69,15 @@ const Sessions = () => {
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">Study Sessions</h1>
             <button className="bg-blue-500 text-white px-4 py-2 rounded shadow mb-4" onClick={() => {setIsModalOpen(true); setEditingIndex(null);}}>Add Session</button>
+            
             <div className="mt-4">
                 <h2 className="text-xl font-bold mb-2">Recent Sessions</h2>
-                {/* <div className="flex mb-2">
-                    <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={() => handleSort('date')}>Sort by Date</button>
-                    <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4" onClick={() => handleSort('duration')}>Sort by Duration</button>
-                    <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={() => handleSort('subject')}>Sort by Subject</button>
-                </div> */}
+            
                 {sessions.map((session, index) => (
                     <div key={index} className="border border-gray-300 rounded p-2 mb-2 cursor-pointer">
-                        <p onClick={() => handleSort('date')}><strong>Date:</strong> {session.date}</p>
-                        <p><strong>Subject:</strong> {session.subject}</p>
-                        <p><strong>Duration:</strong> {session.duration} minutes</p>
+                        <p><strong onClick={() => handleSort('date')}>Date:</strong> {session.date}</p>
+                        <p><strong onClick={() => handleSort('duration')}>Subject:</strong> {session.subject}</p>
+                        <p><strong onClick={() => handleSort('subject')}>Duration:</strong> {session.duration} minutes</p>
                         <p><strong>Notes:</strong> {session.notes}</p>
                         <div className="flex justify-end mt-2">
                             <RiEdit2Line className="text-blue-500 cursor-pointer mr-2" onClick={() => handleEditSession(index)} />
