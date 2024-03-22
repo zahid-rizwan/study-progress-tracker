@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 
-const Sessions = () => {
+const Sessions = ({ studyGoals }) => {
     const [sessions, setSessions] = useState([]);
     const [newSession, setNewSession] = useState({
         date: '',
@@ -12,6 +12,14 @@ const Sessions = () => {
     const [editingIndex, setEditingIndex] = useState(null);
     const [sortBy, setSortBy] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        // Load sessions data from local storage on component mount
+        const savedSessions = localStorage.getItem('studySessions');
+        if (savedSessions) {
+            setSessions(JSON.parse(savedSessions));
+        }
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -36,6 +44,7 @@ const Sessions = () => {
             notes: ''
         });
         setIsModalOpen(false);
+        saveSessionsToLocalStorage([...sessions, newSession]); // Save sessions to local storage
     };
 
     const handleEditSession = (index) => {
@@ -49,12 +58,13 @@ const Sessions = () => {
         const updatedSessions = [...sessions];
         updatedSessions.splice(index, 1);
         setSessions(updatedSessions);
+        saveSessionsToLocalStorage(updatedSessions); // Save sessions to local storage after deletion
     };
 
     const handleSort = (sortByField) => {
         if (sortBy === sortByField) {
             setSessions([...sessions].reverse());
-            setSortBy(null); // Reset sortBy if same field is clicked again
+            setSortBy(null); // Reset sortBy if the same field is clicked again
         } else {
             setSessions([...sessions].sort((a, b) => {
                 if (a[sortByField] < b[sortByField]) return -1;
@@ -63,6 +73,10 @@ const Sessions = () => {
             }));
             setSortBy(sortByField);
         }
+    };
+
+    const saveSessionsToLocalStorage = (sessions) => {
+        localStorage.setItem('studySessions', JSON.stringify(sessions));
     };
 
     return (
@@ -103,13 +117,17 @@ const Sessions = () => {
                         </div>
                         <div className="mb-4">
                             <label htmlFor="subject" className="block mb-1">Subject:</label>
-                            <input
-                                type="text"
+                            <select
                                 name="subject"
                                 value={newSession.subject}
                                 onChange={handleInputChange}
                                 className="border border-gray-300 px-2 py-1 rounded mb-2 w-full"
-                            />
+                            >
+                                <option value="">Select Subject</option>
+                                {studyGoals.map((goal, index) => (
+                                    <option key={index} value={goal.subject}>{goal.subject}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="mb-4">
                             <label htmlFor="duration" className="block mb-1">Duration (in minutes):</label>
