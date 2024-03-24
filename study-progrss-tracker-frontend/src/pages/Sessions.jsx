@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 
-const Sessions = ({ studyGoals }) => {
+const Sessions = () => {
     const [sessions, setSessions] = useState([]);
     const [newSession, setNewSession] = useState({
         date: '',
@@ -12,12 +12,13 @@ const Sessions = ({ studyGoals }) => {
     const [editingIndex, setEditingIndex] = useState(null);
     const [sortBy, setSortBy] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [studyGoals, setStudyGoals] = useState([]);
 
     useEffect(() => {
-        // Load sessions data from local storage on component mount
-        const savedSessions = localStorage.getItem('studySessions');
-        if (savedSessions) {
-            setSessions(JSON.parse(savedSessions));
+        // Load study goals data from local storage on component mount
+        const savedGoals = localStorage.getItem('studyGoals');
+        if (savedGoals) {
+            setStudyGoals(JSON.parse(savedGoals));
         }
     }, []);
 
@@ -37,6 +38,17 @@ const Sessions = ({ studyGoals }) => {
             // Adding new session
             setSessions([...sessions, newSession]);
         }
+        if (newSession.subject) {
+            // Find the goal related to the session's subject
+            const relatedGoal = studyGoals.find(goal => goal.subject === newSession.subject);
+            if (relatedGoal) {
+                // Update remaining time of the goal
+                const updatedGoal = { ...relatedGoal, remainingTime: Math.max(0, relatedGoal.remainingTime - parseInt(newSession.duration)) };
+                const updatedGoals = studyGoals.map(goal => (goal.id === updatedGoal.id ? updatedGoal : goal));
+                setStudyGoals(updatedGoals);
+                localStorage.setItem('studyGoals', JSON.stringify(updatedGoals));
+            }
+        }
         setNewSession({
             date: '',
             subject: '',
@@ -44,7 +56,6 @@ const Sessions = ({ studyGoals }) => {
             notes: ''
         });
         setIsModalOpen(false);
-        saveSessionsToLocalStorage([...sessions, newSession]); // Save sessions to local storage
     };
 
     const handleEditSession = (index) => {
@@ -58,13 +69,12 @@ const Sessions = ({ studyGoals }) => {
         const updatedSessions = [...sessions];
         updatedSessions.splice(index, 1);
         setSessions(updatedSessions);
-        saveSessionsToLocalStorage(updatedSessions); // Save sessions to local storage after deletion
     };
 
     const handleSort = (sortByField) => {
         if (sortBy === sortByField) {
             setSessions([...sessions].reverse());
-            setSortBy(null); // Reset sortBy if the same field is clicked again
+            setSortBy(null); // Reset sortBy if same field is clicked again
         } else {
             setSessions([...sessions].sort((a, b) => {
                 if (a[sortByField] < b[sortByField]) return -1;
@@ -73,10 +83,6 @@ const Sessions = ({ studyGoals }) => {
             }));
             setSortBy(sortByField);
         }
-    };
-
-    const saveSessionsToLocalStorage = (sessions) => {
-        localStorage.setItem('studySessions', JSON.stringify(sessions));
     };
 
     return (
@@ -124,8 +130,8 @@ const Sessions = ({ studyGoals }) => {
                                 className="border border-gray-300 px-2 py-1 rounded mb-2 w-full"
                             >
                                 <option value="">Select Subject</option>
-                                {studyGoals.map((goal, index) => (
-                                    <option key={index} value={goal.subject}>{goal.subject}</option>
+                                {studyGoals.map(goal => (
+                                    <option key={goal.id} value={goal.subject}>{goal.subject}</option>
                                 ))}
                             </select>
                         </div>
@@ -155,7 +161,8 @@ const Sessions = ({ studyGoals }) => {
                             >
                                 {editingIndex !== null ? 'Save Session' : 'Add Session'}
                             </button>
-                            <button className="bg-red-500 text-white px-4 py-2 rounded shadow" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                            <button className="bg-red-500 text-white px-4 py-2 rounded shadow" onClick={() => setIsModalOpen(false)}>Cancel
+                            </button>
                         </div>
                     </div>
                 </div>
