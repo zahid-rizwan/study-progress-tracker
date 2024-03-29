@@ -255,11 +255,54 @@ const GoalTracker = () => {
             <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
               <div
                 class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                style={{ width: `${(goal.duration - goal.remainingTime) / goal.duration * 100}%` }}
+                style={{
+                  width: `${
+                    ((goal.duration - goal.remainingTime) / goal.duration) * 100
+                  }%`,
+                }}
               >
-                {(goal.duration-goal.remainingTime)/goal.duration*100}%
+                {(
+                  ((goal.duration - goal.remainingTime) / goal.duration) *
+                  100
+                ).toFixed(2)}
+                %
               </div>
             </div>
+            {/* <div className="relative w-20 h-20">
+              <svg
+                className="absolute top-0 left-0 w-full h-full"
+                viewBox="0 0 32 32"
+              >
+                <circle
+                  className="stroke-current text-gray-200 dark:text-gray-700"
+                  cx="16"
+                  cy="16"
+                  r="15"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <circle
+                  className="stroke-current text-blue-600"
+                  cx="16"
+                  cy="16"
+                  r="15"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeDasharray={`${
+                    ((goal.duration - goal.remainingTime) / goal.duration) * 94
+                  } 94`}
+                  transform="rotate(-90 16 16)"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-sm font-medium text-white dark:text-blue-600">
+                {(
+                  ((goal.duration - goal.remainingTime) / goal.duration) *
+                  100
+                ).toFixed(2)}
+                %
+              </div>
+            </div> */}
+
             <button
               className="bg-red-500 text-white px-4 py-2 rounded shadow mt-2"
               onClick={() => handleDeleteGoal(goal.id)}

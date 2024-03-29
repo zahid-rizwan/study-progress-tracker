@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 
 const Sessions = () => {
-    const [sessions, setSessions] = useState([]);
+    const [sessions, setSessions] = useState(() => {
+        const savedSessions = localStorage.getItem('sessions');
+        return savedSessions ? JSON.parse(savedSessions) : [];
+    });
     const [newSession, setNewSession] = useState({
         date: '',
         subject: '',
@@ -21,6 +24,11 @@ const Sessions = () => {
             setStudyGoals(JSON.parse(savedGoals));
         }
     }, []);
+
+    useEffect(() => {
+        // Save sessions data to local storage whenever it's updated
+        localStorage.setItem('sessions', JSON.stringify(sessions));
+    }, [sessions]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -86,8 +94,8 @@ const Sessions = () => {
     };
 
     return (
-        <div className="container mx-auto">
-            <h1 className="text-2xl font-bold mb-4">Study Sessions</h1>
+        <div className="container mx-auto px-3 py-2">
+            <h1 className="text-2xl font-bold text-center mb-4 text-blue-900">Study Sessions</h1>
             <button className="bg-blue-500 text-white px-4 py-2 rounded shadow mb-4" onClick={() => {setIsModalOpen(true); setEditingIndex(null);}}>Add Session</button>
             
             <div className="mt-4">
@@ -130,7 +138,13 @@ const Sessions = () => {
                                 className="border border-gray-300 px-2 py-1 rounded mb-2 w-full"
                             >
                                 <option value="">Select Subject</option>
+                                {/* Default Subjects */}
+                                <option value="Math">Math</option>
+                                <option value="Physics">Physics</option>
+                                {/* Mapping studyGoals for additional options */}
                                 {studyGoals.map(goal => (
+                                    // Ensure not to include Math and Physics again
+                                    (goal.subject !== 'Math' && goal.subject !== 'Physics') &&
                                     <option key={goal.id} value={goal.subject}>{goal.subject}</option>
                                 ))}
                             </select>
