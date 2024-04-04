@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AssignmentTracker = () => {
   const [assignments, setAssignments] = useState([]);
@@ -17,6 +17,20 @@ const AssignmentTracker = () => {
     ("0" + currentDate.getDate()).slice(-2);
   const [showModal, setShowModal] = useState(false);
   const [sortBy, setSortBy] = useState(null);
+
+  useEffect(() => {
+    console.log("Fetching assignments from local storage...");
+    const savedAssignments = localStorage.getItem("assignments");
+    console.log("Saved assignments:", savedAssignments);
+    if (savedAssignments) {
+      setAssignments(JSON.parse(savedAssignments));
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("Saving assignments to local storage:", assignments);
+    localStorage.setItem("assignments", JSON.stringify(assignments));
+  }, [assignments]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -101,9 +115,9 @@ const AssignmentTracker = () => {
               onChange={handleInputChange}
               className="block w-full px-4 py-2 border rounded mb-2"
             >
-              <option value="low" style={{color:"rgb(34 197 94)"}}>Low Priority</option>
-              <option value="medium" style={{color:"rgb(217 119 6)"}}>Medium Priority</option>
-              <option value="high" style={{color:"rgb(220 38 38)"}}>High Priority</option>
+              <option value="low">Low Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="high">High Priority</option>
             </select>
             <div className="flex justify-end">
               <button

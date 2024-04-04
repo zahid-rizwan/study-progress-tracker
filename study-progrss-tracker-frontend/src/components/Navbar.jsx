@@ -1,9 +1,22 @@
 import React from "react";
 import { FaUserCircle, FaBars } from "react-icons/fa";
+import { doLogout, getCurrentUser, isLoggedIn } from "../auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = ({ sidebarToggle, setSidebarToggle }) => {
+  const [login, setLogin] = useState(false);
+  let navigate=useNavigate();
+  const logout = () => {
+    console.log("logout")
+    doLogout(() => {
+      setLogin(false);
+      navigate("/");
+    });
+  };
+  
   return (
-    <nav className="bg-gray-800 px-4 py-3 flex justify-between">
+    <nav className=" bg-gray-800 px-4 py-3 flex justify-between">
       <div className="flex items-center text-xl">
         <span className="text-white font-semibold">Study Progerss Tracker</span>
       </div>
@@ -19,7 +32,7 @@ export const Navbar = ({ sidebarToggle, setSidebarToggle }) => {
                 <a href="">Setting</a>
               </li>
               <li>
-                <a href="">Log Out</a>
+                <p onClick={logout}>Log Out</p>
               </li>
             </ul>
           </div>

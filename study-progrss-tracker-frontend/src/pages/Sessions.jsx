@@ -139,12 +139,12 @@ const Sessions = () => {
                             >
                                 <option value="">Select Subject</option>
                                 {/* Default Subjects */}
-                                <option value="Math">Math</option>
-                                <option value="Physics">Physics</option>
+                                <option value="CLCS">CLCS</option>
+                                <option value="Computer Network">Computer Network</option>
                                 {/* Mapping studyGoals for additional options */}
                                 {studyGoals.map(goal => (
                                     // Ensure not to include Math and Physics again
-                                    (goal.subject !== 'Math' && goal.subject !== 'Physics') &&
+                                    (goal.subject !== 'CLCS' && goal.subject !== 'Computer Network') &&
                                     <option key={goal.id} value={goal.subject}>{goal.subject}</option>
                                 ))}
                             </select>
