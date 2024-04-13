@@ -46,7 +46,7 @@ const SideBar = ({ sidebarToggle }) => {
     { icon: <FaRegFileAlt className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Sessions", path: "/student" },
     { icon: <FaPoll className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Assignments", path: "/student/assignments" },
     { icon: <FaRegEnvelope className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Goals", path: "/student/goals" },
-    { icon: <FaCog className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Profile", path: "/student/profile" }
+    { icon: <FaCog className="inline-block w-6 h-6 mr-2 -mt-2" />, text: "Quiz", path: "/student/quiz" }
   ];
 
   return (

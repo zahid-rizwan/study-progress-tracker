@@ -70,7 +70,7 @@ const router = createHashRouter([
         element: <Assignments />,
       },
       {
-        path: "/student/profile",
+        path: "/student/quiz",
         element:<Profile/>,
       }
       

@@ -2,24 +2,31 @@
 
 import React from "react";
 import Footer from "./Footer";
-
-import sliderImage from "../assets/prg2.jpg";
-import sliderImage1 from "../assets/prg1.jpg";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import MyCarousel from "./MyCarousel";
 
 const LandingPage = () => {
   return (
     <>
       <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
-        <div className="w-full pt-16">
-          <img
+          {/* <img
             className="w-full mt-1"
             src={sliderImage}
             alt=""
             style={{ height: "92vh" }}
-          />
-        </div>
+          /> */}
+          <MyCarousel/>
+        
         <section className="container mx-auto px-20 mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Typography variant="h3" className=" text-center text-green-700 underline">Our Features</Typography>
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
             <div>
               <img
                 src={sliderImage1}
@@ -42,13 +49,13 @@ const LandingPage = () => {
                 potential.
               </p>
             </div>
-          </div>
+          </div> */}
         </section>
 
-        <section className="container mx-auto px-20 mt-12">
-          <h2 className="text-3xl font-bold mb-4">Key Features</h2>
+        <section className="container mx-auto px-20 mt-2">
+          {/* <h2 className="text-3xl font-bold mb-4">Key Features</h2> */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
+            {/* <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-bold mb-4">Study Session Tracking</h3>
               <p className="text-gray-700 ">
                 Record your study sessions with ease. Keep track of subjects,
@@ -68,7 +75,52 @@ const LandingPage = () => {
                 Gain valuable insights into your study habits and progress.
                 Identify areas for improvement and track your growth over time.
               </p>
-            </div>
+            </div> */}
+            <Card className="mt-6  p-6">
+              <CardBody>
+                <Typography variant="h5" color="blue-gray" className="mb-2">
+                Study Session Tracking
+                </Typography>
+                <Typography>
+                  The place is close to Barceloneta Beach and bus stop just 2
+                  min by walk and near to &quot;Naviglio&quot; where you can
+                  enjoy the main night life in Barcelona.
+                </Typography>
+              </CardBody>
+              <CardFooter className="pt-0">
+                <Button>Read More</Button>
+              </CardFooter>
+            </Card>
+            <Card className="mt-6 p-6">
+              <CardBody>
+                <Typography variant="h5" color="blue-gray" className="mb-2">
+                Goal Setting
+                </Typography>
+                <Typography>
+                  The place is close to Barceloneta Beach and bus stop just 2
+                  min by walk and near to &quot;Naviglio&quot; where you can
+                  enjoy the main night life in Barcelona.
+                </Typography>
+              </CardBody>
+              <CardFooter className="pt-0">
+                <Button>Read More</Button>
+              </CardFooter>
+            </Card>
+            <Card className="mt-6">
+              <CardBody>
+                <Typography variant="h5" color="blue-gray" className="mb-2">
+                Progress Insights
+                </Typography>
+                <Typography>
+                  The place is close to Barceloneta Beach and bus stop just 2
+                  min by walk and near to &quot;Naviglio&quot; where you can
+                  enjoy the main night life in Barcelona.
+                </Typography>
+              </CardBody>
+              <CardFooter className="pt-0">
+                <Button>Read More</Button>
+              </CardFooter>
+            </Card>
           </div>
         </section>
 
