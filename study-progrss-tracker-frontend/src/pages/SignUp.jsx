@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { signup } from "../services/user-service";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 const SignUp = () => {
   const [data, setData] = useState({
     name: "",
@@ -23,7 +24,7 @@ const SignUp = () => {
     console.log(data);
     signup(data)
       .then((resp) => {
-        toast.success("User register Successfully user id " + resp.id);
+        toast.success("User register Successfully user id ");
         setData({
           name: "",
           email: "",
@@ -50,8 +51,8 @@ const SignUp = () => {
     setData({ ...data, [field]: event.target.value });
   };
   return (
-    <div className="mt-10 w-full">
-      <section className="bg-gray-50 ">
+    <div className="w-full">
+      <section className="bg-gray-100 ">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -146,12 +147,9 @@ const SignUp = () => {
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account?{" "}
-                  <a
-                    href="#"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Login here
-                  </a>
+                  <NavLink to={"/login"} className="font-medium text-blue-600 hover:underline dark:text-primary-500">
+                  Login
+                  </NavLink>
                 </p>
               </form>
             </div>

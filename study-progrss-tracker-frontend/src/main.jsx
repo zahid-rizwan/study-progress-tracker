@@ -11,9 +11,9 @@ import AboutUsPage from "./pages/AboutUsPage.jsx";
 import LandingPage from "./components/LandingPage.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
-import DashBoard from "./components/DashBoard.jsx";
 import Main from "./pages/Main.jsx";
 import ServicePage from "./pages/ServicePage.jsx"
+
 const router = createHashRouter([
   {
     path: "/",

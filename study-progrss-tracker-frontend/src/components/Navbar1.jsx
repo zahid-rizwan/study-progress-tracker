@@ -1,33 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
+import { NavLink } from "react-router-dom";
 
 const Navbar1 = () => {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
 
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 960) {
+        setOpenNav(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const navList = (
     <ul className="mt-2 mb-4 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1"
-      >
-        <a href="#" className="flex items-cente font-semibold text-black">
+      <Typography as="li" variant="small" color="blue-gray" className="p-1">
+        <NavLink
+          className="flex font-semibold items-center rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          to="/"
+        >
           Home
-        </a>
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -35,9 +39,12 @@ const Navbar1 = () => {
         color="blue-gray"
         className="p-1 font-normal text-black"
       >
-        <a href="#" className="flex font-semibold items-center">
+        <NavLink
+          className="flex font-semibold items-center hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          to="/about"
+        >
           About
-        </a>
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -45,9 +52,12 @@ const Navbar1 = () => {
         color="blue-gray"
         className="p-1 font-normal text-black"
       >
-        <a href="#" className="flex font-semibold items-center">
-          About Us
-        </a>
+        <NavLink
+          className="flex font-semibold items-center rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          to="/service"
+        >
+          Services
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -55,9 +65,12 @@ const Navbar1 = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex font-semibold items-center text-black">
-          Conatact Us
-        </a>
+        <NavLink
+          className="flex font-semibold items-center rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          to="/service"
+        >
+          Contact Us
+        </NavLink>
       </Typography>
     </ul>
   );
@@ -72,26 +85,31 @@ const Navbar1 = () => {
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            <b>S</b>tudy <b>P</b>rogress <b>T</b>racker
-          </span>
+              <b>S</b>tudy <b>P</b>rogress <b>T</b>racker
+            </span>
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <Button
-                variant="text"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Log In</span>
-              </Button>
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Sign in</span>
-              </Button>
+              <NavLink to={"/login"}>
+                <Button
+                  variant="text"
+                  size="sm"
+                  className="hidden lg:inline-block"
+                >
+                  Login
+                </Button>
+              </NavLink>
+              <NavLink to={"/signup"}>
+                <Button
+                  variant="gradient"
+                  size="sm"
+                  className="hidden lg:inline-block"
+                >
+                  Sign Up
+                  {/* </button> */}
+                </Button>
+              </NavLink>
             </div>
             <IconButton
               variant="text"
@@ -132,19 +150,24 @@ const Navbar1 = () => {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav} className="lg:hidden">
           {navList}
-          <div className="flex items-center gap-x-1">
+          <div className="flex items-center gap-x-1 justify-center">
+          <NavLink to={"/login"} className=" w-2/6">
             <Button fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
+              Login
             </Button>
+            </NavLink>
+            <NavLink to={"/signup"} className="w-2/6">
             <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
+            Sign up
             </Button>
+            </NavLink>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );
 };
+
 export default Navbar1;

@@ -49,7 +49,7 @@ const LogIn = () => {
   
   return (
     <div className="w-full">
-      <section className="bg-gray-5">
+      <section className="bg-gray-100">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -98,7 +98,7 @@ const LogIn = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
-                    <div className="flex items-center h-5">
+                    {/* <div className="flex items-center h-5">
                       <input
                         id="remember"
                         aria-describedby="remember"
@@ -106,22 +106,22 @@ const LogIn = () => {
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                         required=""
                       />
-                    </div>
-                    <div className="ml-3 text-sm">
+                    </div> */}
+                    {/* <div className="ml-3 text-sm">
                       <label
                         htmlFor="remember"
                         className="text-gray-500 dark:text-gray-300"
                       >
                         Remember me
                       </label>
-                    </div>
+                    </div> */}
                   </div>
-                  <a
+                  {/* <a
                     href="#"
                     className="text-sm font-medium text-blue-600 hover:underline dark:text-primary-500"
                   >
                     Forgot password?
-                  </a>
+                  </a> */}
                 </div>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded  w-full  text-center">
                   Sign in

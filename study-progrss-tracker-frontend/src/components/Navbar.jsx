@@ -24,13 +24,7 @@ export const Navbar = ({ sidebarToggle, setSidebarToggle }) => {
         <button className="text-white group">
           <FaUserCircle className="w-6 h-6 mt-1" />
           <div className="z-10 hidden absolute bg-white rounded-lg shadow w-32 group-focus:block top-full right-0">
-            <ul className="py-2 text-sm text-gray-950">
-              <li>
-                <a href="">Profile</a>
-              </li>
-              <li>
-                <a href="">Setting</a>
-              </li>
+            <ul className="py-2 text-sm text-gray-900">+
               <li>
                 <p onClick={logout}>Log Out</p>
               </li>
