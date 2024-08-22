@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/api/student")
 public class StudentController {
     @Autowired
     private ModelMapper modelMapper;
@@ -23,6 +23,18 @@ public class StudentController {
         StudentDto student = this.studentService.createStudent(studentDto);
         System.out.println(student);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
+    }
+    @PutMapping("/{studentId}")
+    public ResponseEntity<StudentDto> updateStudent(@RequestBody StudentDto studentDto, @PathVariable("studentId") int studentId) {
+        return ResponseEntity.ok(this.studentService.updateStudent(studentDto, studentId));
+    }
+    @GetMapping("/{studentId}")
+    public ResponseEntity<StudentDto> getStudentById(@PathVariable("studentId") int studentId) {
+        return ResponseEntity.ok(this.studentService.getStudentById(studentId));
+    }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<StudentDto> getStudentByEmail(@PathVariable("email") String email) {
+        return ResponseEntity.ok(this.studentService.getStudentByEmail(email));
     }
 //    @DeleteMapping("/{studentId}")
 //    public void updateStudent(Student student) {
