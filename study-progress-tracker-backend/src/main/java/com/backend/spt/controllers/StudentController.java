@@ -1,6 +1,7 @@
 package com.backend.spt.controllers;
 
 import com.backend.spt.entities.Student;
+import com.backend.spt.payloads.ApiResponse;
 import com.backend.spt.payloads.StudentDto;
 import com.backend.spt.sevices.StudentService;
 import org.modelmapper.ModelMapper;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller for managing student operations.
@@ -69,11 +72,22 @@ public class StudentController {
         return ResponseEntity.ok(this.studentService.getStudentByEmail(email));
     }
 
-    //    @DeleteMapping("/{studentId}")
-    //    public void updateStudent(Student student) {
-    //
-    //    }
-    //    public void deleteStudent(int studentId) {
-    //
-    //    }
+    /**
+     * Deletes a student by their unique identifier.
+     *
+     * @param studentId The unique identifier of the student to be deleted.
+     * @return A ResponseEntity containing an ApiResponse indicating the success of the deletion operation.
+     *         The ApiResponse contains a message indicating the success of the deletion and a boolean flag indicating success.
+     *         The HTTP status code of the response is OK.
+     */
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<ApiResponse> deleteStudent(@PathVariable("studentId") int studentId) {
+        this.studentService.deleteStudent(studentId);
+        return new ResponseEntity<>(new ApiResponse("Student deleted successfully", true), HttpStatus.OK);
+    }
+    @GetMapping("/")
+    public ResponseEntity<List<StudentDto>> getAllStudents(){
+        List<StudentDto> students = this.studentService.getAllStudents();
+        return new ResponseEntity<List<StudentDto>>(students, HttpStatus.OK);
+    }
 }
