@@ -34,7 +34,6 @@ public class StudentController {
         // Logic to add student
 
         StudentDto student = this.studentService.createStudent(studentDto);
-        System.out.println(student);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 

@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Date;
 
 /**
  * Represents an assignment entity in the system.
@@ -24,12 +24,12 @@ public class Assignment {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int assignmentId;
+    private int id;
 
     /**
      * Name of the assignment.
      */
-    private String assignmentName;
+    private String assignmentTitle;
 
     /**
      * Description of the assignment.
@@ -39,16 +39,17 @@ public class Assignment {
     /**
      * Date when the assignment was added to the system.
      */
-    private String addedDate;
+    private Date addedDate;
 
     /**
      * Date when the assignment is due.
      */
-    private String dueDate;
+    private Date dueDate;
 
     /**
      * Current status of the assignment.
      */
     private String status;
+    @ManyToOne
     private Student student;
 }
