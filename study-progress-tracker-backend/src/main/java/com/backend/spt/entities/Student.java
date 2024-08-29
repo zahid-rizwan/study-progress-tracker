@@ -15,7 +15,7 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int studentId;
     private String name;
     @Column(unique = true)
     private String email;
@@ -23,5 +23,7 @@ public class Student {
     private String about;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Assignment> assignments = new ArrayList<>();
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Goal> goals = new ArrayList<>();
 
 }

@@ -24,7 +24,7 @@ public class Assignment {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int assignmentId;
 
     /**
      * Name of the assignment.
