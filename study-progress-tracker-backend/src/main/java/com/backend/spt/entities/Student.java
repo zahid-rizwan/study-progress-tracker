@@ -21,6 +21,9 @@ public class Student {
     private String email;
     private String password;
     private String about;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Course> courses;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Assignment> assignments = new ArrayList<>();
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
